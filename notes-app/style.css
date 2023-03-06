@@ -1,0 +1,102 @@
+body {
+    background-color: blueviolet;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.container {
+    width: 550px;
+    height: 450px;
+    background-color: black;
+    color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: none;
+    border-radius: 15px;
+}
+
+.container h3 {
+    text-transform: capitalize;
+    font-size: 25px;
+}
+
+.input-btn {
+    display: flex;
+    flex-direction: row;
+    width: 60%;
+}
+
+
+.input-btn input {
+    border: solid 1.3px blueviolet;
+    width: 100%;
+
+}
+
+.input-btn input[type="text"]{
+    background-color: transparent;
+    color: aliceblue;
+    border-right: none;
+    padding: 0;
+    height: 20px;
+    padding: 0 0 0 5px;
+}
+
+.input-btn input[type="button"] {
+    border-left: none;
+    background-color: blueviolet;
+    cursor: pointer;
+    width: 30%;
+    height: 22px;
+}
+
+.input-btn input[type="button"]:hover{
+    opacity: 0.9;
+    
+}
+
+.input-btn input:focus{
+    outline: none;
+}
+
+.note {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 80%;
+    margin: 50px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px
+}
+
+.note >li {
+    background-color: aliceblue;
+    color: black;
+    width: 80%;
+    height: 30px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.note >li .todo-btns{
+    display: flex;
+    gap: 10px;
+}
+
+.note >li .todo-btns > *{
+    cursor: pointer;
+}
