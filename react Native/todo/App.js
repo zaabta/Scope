@@ -7,32 +7,59 @@ import {
   KeyboardAvoidingView,
   Platform,
   TouchableOpacity,
+  Alert
 } from "react-native";
-
 import { StatusBar } from "expo-status-bar";
-import { SingleTodo } from "./components/SingleTod";
+import { SingleTodo } from "./components/SingleTodo";
 import { useState } from "react";
 
 const App = () => {
   const [text, setText] = useState("");
+  const [todoes, setTodoes] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
+
   const createTodo = () => {
-    setTodoes([
-      ...todoes,
-      {
-        id: Math.floor(Math.random() * 1000),
-        content: text
-      }
-    ]);
+    if (text.length > 1)
+      setTodoes([
+        ...todoes,
+        {
+          id: todoes.length + 1,
+          content: text
+        }
+      ]);
+    else Alert.alert("wrong", "you can not Create empty todo !")  
     setText("");
   };
-  const [todoes, setTodoes] = useState([]);
+
+  const removeTodo = (id) => {
+    setTodoes((prev) => {
+      const newTodoes = [...prev]; // deep clone
+      const index = newTodoes.findIndex((todo) => todo.id === id); // TO find the index
+      newTodoes.splice(index, 1); // remove the todo by index
+      return newTodoes;
+    });
+  };
+  const editTodo = (id, newContent) => {
+    const newTodoes = [...todoes];
+    const index = newTodoes.findIndex((todo) => todo.id === id); // TO find the index
+    newTodoes[index].content = newContent;
+    setTodoes(newTodoes);
+  };
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar hidden={true} />
       <Text style={styles.header}>Today’s tasks</Text>
       <ScrollView contentContainerStyle={styles.todoList}>
         {todoes.map((todo, index) => (
-          <SingleTodo content={todo?.content} key={index} />
+          <SingleTodo
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
+            remove={removeTodo}
+            id={todo.id}
+            content={todo?.content}
+            key={index}
+            handleOnEditTodo={editTodo}
+          />
         ))}
       </ScrollView>
       <KeyboardAvoidingView
